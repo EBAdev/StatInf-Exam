@@ -4,9 +4,117 @@
 \includegraphics[width=\textwidth]{figures/CR-1.pdf}
 \includegraphics[width=\textwidth]{figures/CR-2.pdf}
 \end{figure}
+\textbf{Comments}
+We consider a dominated statistical model $(\P_{\theta})_{\theta \in \Theta}$ on $(\mathcal{Z},
+\mathcal{A})$, where $\Theta \in \R^{p}$ with density $f(\cdot ;\theta)$ with respect to a
+$\sigma$-finite measure $\mu$. When $f(z;\eta)> 0$ we let $\ell(z;\eta) = \log f(z;\eta)$. When
+$\dot f(z;\eta)$ exists and $f$ is positive the chain rule gives the score:
+\begin{equation} 
+\dot \ell(z;\eta) = \frac{\partial \ell}{\partial \eta} (z;\eta) = \frac{\dot f(z;\eta)}{f(z;\eta)} 
+\label{eq:disp6-score}
+.\end{equation}
+For $T$ as in \textbf{(1)} the Cramér-Rao inequality gives a lower bound for $\V_{\theta}[T]$ when
+$T$ is unbiased for $\psi(\theta)$ in a neighborhood of the parameter value at which the bound is
+evaluated. 
+\fxnote{Forstår ikke lige det sidste om neighborhood.}
+
 \global\def\lastproofcolor{theorembordercolor}
 \begin{proof}
+  First we show the score identity, $\E_{\theta}[\dot\ell(Z;\theta) ]= 0$.
+
+  Since $f$ is a density:
+  \[ 
+  \int f(z;\eta) \d \mu(z) = 1
+  ,\]
+   for all $\eta \in N$. By the smoothness and domination condition, \textbf{(2)}, $h(z;\eta) =
+   f(z;\eta)$ satisfies the differentiability and local domination assumptions in Proposition 2.22.
+   The inegrability assumption in that proposition follows from the normalizing indentity. Hence
+   Proposition 2.22 gives
+   \[ 
+   \int \dot f(z;\theta) \d \mu(z) = 0
+   .\]
+   By the score defined in \Cref{eq:disp6-score} with $\eta = \theta$, we get:
+   \[ 
+     \int \dot f(z;\theta) \d \mu(z) = \E_{\theta}[\dot \ell(Z;\theta)]= 0
+   ,\]
+   which shows the score identity.
+
+   Next we show that $\eta \mapsto \psi(\eta)$ is differentiable at $\theta$ with $\dot \psi =
+   \E_{\theta}[T \dot \ell(Z;\theta)]$. Since $\E_{\eta}[T] = \psi(\eta)$ for every $\eta \in N$ by
+   the ubiasedness condition, \textbf{(1)}, it suffices to show the corresponding result for $\eta
+   \mapsto  \E_{\eta}[T]$. 
+
+   We want to apply Proposition 2.22 to $h_T(z;\eta) = t(z) f(z;\eta)$. 
+   \begin{itemize}
+   \item By \textbf{(1)}, $h_T(\cdot ;\eta)$ is $\mu$-integrable for every $\eta \in N$. 
+    \item By \textbf{(2)}, the map is $\eta \mapsto h_T(z;\eta)$ is continuously differentiable for
+      every $z$ with derivative $t(z) \dot f(z;\eta)$, and this derivative is locally dominated by
+   $\mu$-integrable envelopes on $N$. 
+   \end{itemize}
+   Therefore, $\eta \mapsto \E_{\eta}[T]$ is differentiable at $\theta$ and we can switch the order
+   of integration and differentiation to get:
+   \[ 
+     \frac{\partial }{\partial \eta} \E_{\eta}[T] \big|_{\eta = \theta} 
+     = \frac{\partial }{\partial \eta} \int t(z)f(z;\eta) \d\mu (z) \big|_{\eta =\theta}
+     = \frac{\partial }{\partial \eta} \int t(z)f(z;\theta) \d\mu (z) 
+     = \E_{\theta}[T \dot\ell(Z;\theta)]
+   .\]
+   Where the last step uses \Cref{eq:disp6-score} with $\eta= \theta$.
+
+   By \textbf{(1)}, $T$ is square integrable under $\P_{\theta}$, and so are all entries of $\dot
+   \ell(Z;\theta)$  by \textbf{(3)}. Thus, all variances and covariances in this proof will be
+   finite.
+
+   Combining $\dot \psi(\theta) = \E_{\theta}[T \dot\ell(Z;\theta)]$ with the score identity gives
+   \[ 
+     \dot \psi(\theta) = \E_{\theta}[T \dot \ell(Z;\theta)] =
+     \E_{\theta}[(T-\psi(\theta))\dot\ell(Z;\theta)] = \cov_{\theta}[T,\dot\ell(Z;\theta)]
+   .\]
+   For any $a \in \R^{p}$, 
+   \[ 
+     0 \le \V_{\theta}[T-a^{\top }\dot\ell(Z;\theta)] = \V_{\theta}[T] - 2a^{\top }\dot\psi(\theta)
+     + a^{\top }I(\theta) a
+   ,\]
+   since $\V_{\theta}[\dot\ell(Z;\theta)] = I(\theta)$ by the score identity. Taking $a =
+   I(\theta)^{-1}\dot\psi(\theta)$, which is well defined by \textbf{(3)}, gives
+   \[ 
+     0 \le \V_{\theta}[T] - \dot\psi(\theta)^{\top }I(\theta)^{-1}\dot\psi(\theta)
+   .\]
+   This proves the inequality.
 
 \qed
 \end{proof}
+
+\fxnote{Vi skal finde en god måde at deale med referencerne til Prop 2.22 på}
+
+\section{Relevant results}
+\begin{definition*}[2.21 (Local $\mu$-integrable domination)]
+  Let $q,e \in \N$ and let $a: \mathcal{Z} \times  N \to \R^{q} $ or $a:\mathcal{Z} \times  N \to
+  \R^{q\times r}$. We say that $a$ is locally dominated by $\mu$-integrable envelopes on $N$ if for
+  every $\theta_0 \in N$, there exists a compact set $K \subseteq  N$ with $\theta_0 \in
+  \mathrm{int} K$ and a nonnegative $\mu$-integrable function $G_K$ such that, for $\mu$-almost
+  every $z$, $\sup_{\theta \in K} \| a(z;\theta) \|\le G_K(z)$. The compact set $K$ and the envelope
+  $G_K$ may depend on $\theta_0$. The case $q=1$ includes scalar-valued functions.
+\end{definition*}
+
+\begin{proposition*}[2.22 (First-order differentiation under the integral sign)]
+
+  Let $(\mathcal{Z}, \mathcal{A}, \mu)$ be a measure space, let $N \subseteq  \R^{p}$ be open, and
+  let $h: \mathcal{Z}\times  N \to \R$ be jointly measureable. Define $H(\theta) = \int h(z;\theta)
+  \d \mu (z)$,  $\theta \in N$. Assume the following:
+  \begin{enumerate}
+  \item For every $\theta \in N$, the function $h(\cdot ;\theta)$ is integrable with respect to $\mu$.
+  \item For $\mu$-almost every $z$, the map $\theta \mapsto h(z;\theta)$ is continuously
+    differentiable on $N$.
+  \item The derivative $\dot h$ is locally dominated by $\mu$-integrable envelopes on $N$, in the
+    sense of Definition 2.21. Here $\dot h$ denotes any jointly measurable version of the derivative
+    described above.
+  \end{enumerate}
+  Then $H$ is conitnously differentiable on $N$, and differentiation my be interchanged with
+  integration:
+  \[ 
+  \frac{\partial H}{\partial \theta} (\theta) = \int \frac{\partial h}{\partial \theta} (z;\theta)
+  \d \mu(z), \quad  \theta \in N
+  .\]
+\end{proposition*}
 
