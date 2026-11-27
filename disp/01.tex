@@ -7,16 +7,7 @@
 \end{figure}
 \noindent\textbf{Comments:}
 
-$\what{\theta}_n$ denotes a root of the estimating equation $\Psi_n (\theta) = 0$.
-Note that the regularity and envelope assumptions gives a uniform law of large numbers: 
-\begin{lemma*}[2.1 (A uniform law of large numbers) (ULLN)]
-  Assume \textbf{(3)} and \textbf{(4)}. Given data from \textbf{(1)} we have:
-  \[ 
-    \sup_{\theta \in \Theta} \left\| \frac{1}{n} \sum_{i=1}^{n} g(Z_i;\theta) - \E[g(Z;\theta)]
-    \right\|
-    \xrightarrow[n \to \infty ]{a.s.} 0
-  .\]
-\end{lemma*}
+\textcolor{gray}{$\what{\theta}_n$ denotes a root of the estimating equation $\Psi_n (\theta) = 0$.}
 \global\def\lastproofcolor{theorembordercolor} % needed since no theorem is used here
 \begin{proof}[of Theorem 2.5]
 
@@ -32,7 +23,7 @@ Note that the regularity and envelope assumptions gives a uniform law of large n
   \begin{description}
   \item[Uniform convergence of $\Psi_n$] 
   \end{description}
-  By ULLN (with $g = \Psi_n$): 
+  Note that the regularity and envelope assumptions gives a uniform law of large numbers: 
   \[ 
   \Delta_n := \sup_{\theta \in \Theta} \| \Psi_n(\theta) -  \Psi(\theta;\theta_0) \| \xrightarrow[n
   \to \infty ]{a.s.} 0  \implies \Delta_n \xrightarrow[n \to \infty ]{\P} 0
@@ -140,10 +131,12 @@ consistency $\what{\theta}_n \xrightarrow[]{a.s.} \theta_0$.
 
 \section{Applications}
 If weak consistency of an estimator is established, we may use Theorem 2.8 (shown in next
-question) to establish asymptotic normality, if additionally the estimating function $\Psi$ is
-differentiable with finite moment on a compact neighborhood of $\theta_0$ and 
+question) to establish asymptotic normality, if additionally the estimating function $\psi$ is
+continuously differentiable on a compact neighborhood of $\theta_0$, with a derivative that
+satisfies \textbf{(3)} and \textbf{(4)}. And the estimating function is centered with finite second
+moment:
 \[ 
-  \E[\Psi(Z;\theta_0)]=0, \quad  \E[\| \Psi(Z;\theta_0) \|^2 ] < \infty 
+  \E[\psi(Z;\theta_0)]=0, \quad  \E[\| \psi(Z;\theta_0) \|^2 ] < \infty 
 .\]
 
 
